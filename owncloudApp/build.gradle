@@ -91,7 +91,7 @@ android {
         testInstrumentationRunner "com.filesfm.android.utils.OCTestAndroidJUnitRunner"
 
         versionCode = 21500300
-        versionName = "2.15.11"
+        versionName = "2.15.12"
 
         buildConfigField "String", gitRemote, "\"" + getGitOriginRemote() + "\""
         buildConfigField "String", commitSHA1, "\"" + getLatestGitHash() + "\""
