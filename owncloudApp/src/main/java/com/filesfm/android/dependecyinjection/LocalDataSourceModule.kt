@@ -1,0 +1,54 @@
+/**
+ * ownCloud Android client application
+ *
+ * @author David González Verdugo
+ * Copyright (C) 2020 ownCloud GmbH.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.filesfm.android.dependecyinjection
+
+import android.accounts.AccountManager
+import com.filesfm.android.MainApp.Companion.accountType
+import com.filesfm.android.data.OwncloudDatabase
+import com.filesfm.android.data.authentication.datasources.LocalAuthenticationDataSource
+import com.filesfm.android.data.authentication.datasources.implementation.OCLocalAuthenticationDataSource
+import com.filesfm.android.data.capabilities.datasources.LocalCapabilitiesDataSource
+import com.filesfm.android.data.capabilities.datasources.implementation.OCLocalCapabilitiesDataSource
+import com.filesfm.android.data.capabilities.datasources.mapper.OCCapabilityMapper
+import com.filesfm.android.data.sharing.shares.datasources.LocalShareDataSource
+import com.filesfm.android.data.sharing.shares.datasources.implementation.OCLocalShareDataSource
+import com.filesfm.android.data.sharing.shares.datasources.mapper.OCShareMapper
+import com.filesfm.android.data.user.datasources.LocalUserDataSource
+import com.filesfm.android.data.user.datasources.implementation.OCLocalUserDataSource
+import com.filesfm.android.data.user.datasources.mapper.UserQuotaMapper
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
+
+val localDataSourceModule = module {
+    single { AccountManager.get(androidContext())}
+
+    single { OwncloudDatabase.getDatabase(androidContext()).capabilityDao() }
+    single { OwncloudDatabase.getDatabase(androidContext()).shareDao() }
+    single { OwncloudDatabase.getDatabase(androidContext()).userDao() }
+
+    factory { OCCapabilityMapper() }
+    factory { OCShareMapper() }
+    factory { UserQuotaMapper() }
+
+    factory<LocalAuthenticationDataSource> { OCLocalAuthenticationDataSource(androidContext(), get(), accountType) }
+    factory<LocalCapabilitiesDataSource> { OCLocalCapabilitiesDataSource(get(), get()) }
+    factory<LocalShareDataSource> { OCLocalShareDataSource(get(), get()) }
+    factory<LocalUserDataSource> { OCLocalUserDataSource(get(), get()) }
+}
