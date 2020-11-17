@@ -1,12 +1,19 @@
-# built application files
+# Built application files
 *.apk
+*.aar
 *.ap_
+*.aab
 
 # files for the dex VM
 *.dex
 
 # Java class files
 *.class
+
+# Generated files
+bin/
+gen/
+out/
 
 # Local configuration files (sdk path, etc)
 local.properties
@@ -22,7 +29,7 @@ proguard-project.txt
 *.iml
 build
 
-# android sdk captures folder
+# android sdk captures 
 captures
 
 # ignore lint html and xml output
@@ -31,3 +38,30 @@ lint-*ml
 .idea/*
 !.idea/codeStyles/
 
+# Log Files
+*.log
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx/
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Freeline
+freeline.py
+freeline/
+freeline_project_description.json
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.
+
+# Version control
+vcs.xml

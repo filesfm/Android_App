@@ -90,7 +90,7 @@ android {
 
         testInstrumentationRunner "com.filesfm.android.utils.OCTestAndroidJUnitRunner"
 
-        versionCode = 21500300
+        versionCode = 21500303
         versionName = "2.15.12"
 
         buildConfigField "String", gitRemote, "\"" + getGitOriginRemote() + "\""
@@ -222,5 +222,5 @@ static def getGitOriginRemote() {
     def values = process.text.toString().trim().split("\\r\\n|\\n|\\r")
 
     def found = values.find { it.startsWith("origin") && it.endsWith("(push)") }
-    return found.replace("origin", "").replace("(push)", "").replace(".git", "").trim()
+    //return found.replace("origin", "").replace("(push)", "").replace(".git", "").trim()
 }
